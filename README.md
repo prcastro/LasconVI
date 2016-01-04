@@ -1,2 +1,1 @@
-# LasconVI
-LASCON VI
+# LASCON VI
