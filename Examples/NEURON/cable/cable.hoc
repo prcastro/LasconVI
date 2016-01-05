@@ -1,0 +1,12 @@
+create cable
+access cable
+
+L = 10000 /* micron */
+diam = 1  /* micron */
+nseg = 1001
+
+insert pas
+g_pas = 1/20000 /* 1/(Ohm cm^2) = Siemens/cm^2 */
+e_pas = -65     /* mV */
+
+xopen("cable.ses")
