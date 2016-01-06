@@ -1,0 +1,3 @@
+current injections should be either at somaA(0.5) or at dendA1_01001(0.7)
+duration 0.5 ms, amplitude 1 nA
+

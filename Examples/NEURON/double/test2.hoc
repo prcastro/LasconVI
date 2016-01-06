@@ -1,0 +1,98 @@
+/* Purkinje19b972 current clamp simulation: sample traces of somatic  */
+/* and dendritic epsps                                                */
+/* synapse at "dend2" (dendA1_001011(1))                              */
+/* Michael Hausser and Arnd Roth                                      */
+/* Version 1.2 for LASCON 2014                              14.1.2014 */
+
+/* initial parameters */
+t = 0                   /* simulation starts at t = 0 ms */
+dt = 0.01               /* time step, ms */
+simulationstop = 22000  /* simulation ends at t = 220 ms */
+Vrest = -70             /* resting potential, mV */
+
+xopen("Purkinje19b972-1.nrn")  /* load the morphology file */
+
+/* membrane properties are defined here */
+membranecap = 0.638856    /* specific membrane capacitance in uF cm^-2 */
+membraneresist = 120236.0 /* specific membrane resistance in ohm cm^2 */
+axialresist = 141.949     /* axial resistivity in ohm cm */
+
+forall {insert pas e_pas=Vrest}
+forsec "dend" {g_pas=5.34/membraneresist Ra=axialresist cm=5.34*membranecap}
+
+/* aspiny dendrites are listed explicitly here */
+dendA1_0 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_001 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0010 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00101 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_001011 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0010110 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0010111 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00101110 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_001011101 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00101111 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_001011110 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0010111101 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00101111011 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0011 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00110 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_001101 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0011010 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0011011 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_00110110 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_01 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_010 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_011 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0100 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0101 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_01001 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_010010 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_0100100 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_01001001 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+dendA1_010010010 {g_pas=1.2/membraneresist Ra=axialresist cm=1.2*membranecap}
+
+forsec "soma" {g_pas=1/membraneresist Ra=axialresist cm=membranecap}
+forsec "axon" {g_pas=1/membraneresist Ra=axialresist cm=membranecap}
+
+axonA1_0 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+axonA1_000 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+axonA1_0000 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+axonA1_0001 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+axonA1_01 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+axonA1_010 {g_pas=0.1/membraneresist Ra=axialresist cm=0.1*membranecap}
+
+objectvar mySynapse
+
+/* synapse at dendA1_001011(1) */
+// access dendA1_001011
+// mySynapse = new AlphaSynapse(1)
+// mySynapse.onset = 20         /* ms */
+// mySynapse.tau = 3.0          /* ms */
+// mySynapse.gmax = 0.001       /* peak conductance, microsiemens, umho = microsiemens */
+// mySynapse.e = 0              /* reversal potential, mV */
+
+/* IClamp at somaA(0.5) */
+access dendA1_01001
+objectvar stim
+stim = new IClamp(0.7)
+stim.del = 3
+stim.dur = 0.5 /* ms */
+stim.amp = 1 /* nA */
+
+wopen("iclamp.dend.output")
+/* initialization of simulation run */
+t = 0                   /* simulation starts at t = 0 ms */
+count = 0
+finitialize(Vrest)
+fcurrent()
+
+/* simulate EPSP */
+fprint("t somaA.v dend.v\n")
+while (count < simulationstop) {
+	fadvance()
+	fprint("%g %g %g\n", t, somaA.v(0.5), dendA1_01001.v(0.7))
+	count += 1
+}
+
+wopen()
