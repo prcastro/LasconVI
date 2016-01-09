@@ -1,0 +1,26 @@
+dV/dt = (I - g_Na*minf(V)*(V-V_Na) - g_K*n*(V-V_K) -g_KM*o*(V-V_K) - g_leak*(V-V_leak))/C
+dn/dt = (ninf(V)-n)/tau
+do/dt = (oinf(V)-o)/tau_o
+
+v(0)=-16
+n(0)=0.01
+o(0) = 0.0
+
+minf(v)=boltz(v,vhalf_minf,k_minf)
+ninf(v)=boltz(v,vhalf_ninf,k_ninf)
+oinf(v)=boltz(v,vhalf_oinf,k_oinf)
+boltz(v,vh,k)=1/(1+exp((vh-v)/k))
+
+param I=5
+param g_K=9, g_Na=20, g_leak=8, g_KM=5
+param V_Na=60, V_K=-90, V_leak=-80
+param vhalf_minf=-20, k_minf=15
+param vhalf_ninf=-25, tau=0.152
+param vhalf_oinf=-20, tau_o=20
+param k_ninf=5
+param k_oinf=5
+param C=1
+
+@ total=250,dt=.01,xlo=-100,xhi=100,ylo=-.2,yhi=.8,xp=v,yp=n
+@ autoymin=-70,autoymax=-20,parmin=-0.2,parmax=0.4,autoxmin=-0.2,autoxmax=0.4, ds=-0.02
+done

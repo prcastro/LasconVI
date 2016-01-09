@@ -1,0 +1,29 @@
+# SNIC scenario, Nap - K model
+
+dv/dt = (I - g_Na*minf(V)*(V-V_Na) - g_K*n*(V-V_K) - g_leak*(V-V_leak) + s(t))/C
+dn/dt = (ninf(V)-n)/tau
+
+v(0)=-16
+n(0)=0.01
+
+minf(v)=boltz(v,vhalf_minf,k_minf)
+ninf(v)=boltz(v,vhalf_ninf,k_ninf)
+boltz(v,vh,k)=1/(1+exp((vh-v)/k))
+
+param I=0
+param g_K=10, g_Na=20, g_leak=8
+param V_Na=60, V_K=-90, V_leak=-80
+param vhalf_minf=-20, k_minf=15
+param vhalf_ninf=-25, tau=1
+param k_ninf=5
+param C=1
+
+
+# double pulse stimulus 
+param s1=0, t1=10, t2=15, 
+param s2=0, t3=20, t4=25 
+s(t)=s1*heav(t-t1)*heav(t2-t)+s2*heav(t-t3)*heav(t4-t)
+@ total=150,dt=.01,xlo=-100,xhi=100,ylo=-.2,yhi=.8,xp=v,yp=n
+done
+
+
